@@ -10,7 +10,7 @@ services:
    ports:
      - "8080:8080"
    depends_on:
-     - mysql
+     - mysql-service
    networks:
      - mynetwork
  
@@ -19,7 +19,7 @@ services:
    ports:
      - "4200:80"
    depends_on:
-     - mysql
+     - mysql-service
    networks:
      - mynetwork
  
