@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileNotFoundException;
 import java.util.UUID;
 
-@CrossOrigin("*")
+// @CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/api/payroll")
 public class PayrollController {
