@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebSocket Notifications</title>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .notification {
+      padding: 15px;
+      background-color: #e0ffe0;
+      border: 1px solid #5cb85c;
+      border-radius: 8px;
+      margin-top: 15px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<h2>📢 Notification Listener</h2>
+<p>This page listens notifications via WebSocket.</p>
+<div id="notification" class="notification"></div>
+
+<script>
+  const socket = new SockJS('http://localhost:8080/ws/'); // Update port if needed
+   const stompClient = Stomp.over(socket);
+
+   stompClient.connect({}, function (frame) {
+     console.log('🔌 Connected: ' + frame);
+
+     stompClient.subscribe('/topic/notifications', function (message) {
+       const payload = JSON.parse(message.body);
+       console.log("📨 Message received:", payload.message);
+
+       const box = document.getElementById('notification');
+       box.innerText = payload.message;
+       box.style.display = 'block';
+       setTimeout(() => { box.style.display = 'none'; }, 10000);
+     });
+   });
+</script>
+
+</body>
+</html>
