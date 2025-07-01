@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <h2 class="mb-3">{{ isEditMode ? 'Edit' : 'Create' }} Department</h2>
+
+  <!-- Only HR or Admin can see form -->
+  <form *ngIf="canModify()" [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+    <div class="mb-2">
+      <label>Department Code</label>
+      <input formControlName="departmentCode" class="form-control" />
+    </div>
+    <div class="mb-2">
+      <label>Name</label>
+      <input formControlName="name" class="form-control" />
+    </div>
+    <div class="mb-2">
+      <label>Description</label>
+      <input formControlName="description" class="form-control" />
+    </div>
+    <div class="mb-2">
+      <label>Location</label>
+      <input formControlName="location" class="form-control" />
+    </div>
+    <div class="mb-2">
+      <label>Department Head (Manager)</label>
+      <select formControlName="departmentHeadId" class="form-control" required>
+        <option value="" disabled selected>Select Manager</option>
+        <option *ngFor="let mgr of managers" [value]="mgr.userId">
+          {{ mgr.username }} ({{ mgr.email }})
+        </option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
+    <button class="btn btn-secondary ms-2" type="button" (click)="resetForm()">Clear</button>
+  </form>
+
+  <hr />
+
+  <h3>All Departments</h3>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Head</th>
+        <th *ngIf="canModify()">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dept of departments">
+        <td>{{ dept.departmentId }}</td>
+        <td>{{ dept.departmentCode }}</td>
+        <td>{{ dept.name }}</td>
+        <td>{{ dept.location }}</td>
+        <td>{{ getManagerNameById(dept.departmentHeadId) }}</td>
+        <td *ngIf="canModify()">
+          <button class="btn btn-sm btn-info" (click)="editDepartment(dept)">Edit</button>
+          <button class="btn btn-sm btn-danger ms-2" (click)="deleteDepartment(dept.departmentId!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

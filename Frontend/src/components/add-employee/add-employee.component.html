@@ -1,0 +1,182 @@
+<div class="container mt-4">
+  <h2>Add New Employee</h2>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
+    <!-- User & Department -->
+    <div class="row">
+      <div class="col-md-6">
+        <label>User</label>
+        <select class="form-control" formControlName="userId">
+          <option value="" disabled selected>Select User</option>
+          <option *ngFor="let user of allUsers" [value]="user.userId">
+            {{ user.username }} ({{ user.email }})
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label>Department</label>
+        <select class="form-control" formControlName="departmentId">
+          <option value="" disabled selected>Select Department</option>
+          <option *ngFor="let dept of departments" [value]="dept.departmentId">{{ dept.name }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Manager & Employee Code -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Manager</label>
+        <select class="form-control" formControlName="managerId">
+          <option value="" disabled selected>Select Manager</option>
+          <option *ngFor="let mgr of managerUsers" [value]="mgr.userId">
+            {{ mgr.username }} ({{ mgr.email }})
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label>Employee Code</label>
+        <input type="text" class="form-control" formControlName="employeeCode">
+      </div>
+    </div>
+
+    <!-- First Name & Last Name -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>First Name</label>
+        <input type="text" class="form-control" formControlName="firstName">
+      </div>
+      <div class="col-md-6">
+        <label>Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName">
+      </div>
+    </div>
+
+    <!-- Email & Contact -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Email</label>
+        <input type="email" class="form-control" formControlName="email">
+      </div>
+      <div class="col-md-6">
+        <label>Contact Number</label>
+        <input type="text" class="form-control" formControlName="contactNumber">
+      </div>
+    </div>
+
+    <!-- Emergency Contact & Gender -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Emergency Contact</label>
+        <input type="text" class="form-control" formControlName="emergencyContact">
+      </div>
+      <div class="col-md-6">
+        <label>Gender</label>
+        <select class="form-control" formControlName="gender">
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="NON_BINARY">Non-Binary</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- DOB & Joining Date -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Date of Birth</label>
+        <input type="date" class="form-control" formControlName="dob">
+      </div>
+      <div class="col-md-6">
+        <label>Joining Date</label>
+        <input type="date" class="form-control" formControlName="joiningDate">
+      </div>
+    </div>
+
+    <!-- Probation End & Job Type -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Probation End Date</label>
+        <input type="date" class="form-control" formControlName="probationEndDate">
+      </div>
+      <div class="col-md-6">
+        <label>Job Type</label>
+        <select class="form-control" formControlName="jobType">
+          <option value="FULL_TIME">Full Time</option>
+          <option value="PART_TIME">Part Time</option>
+          <option value="CONTRACT">Contract</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Status & Designation -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Status</label>
+        <select class="form-control" formControlName="status">
+          <option value="ACTIVE">Active</option>
+          <option value="ON_NOTICE">On Notice</option>
+          <option value="RESIGNED">Resigned</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label>Designation</label>
+        <input type="text" class="form-control" formControlName="designation">
+      </div>
+    </div>
+
+    <!-- Education & Experience -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Education</label>
+        <input type="text" class="form-control" formControlName="education">
+      </div>
+      <div class="col-md-6">
+        <label>Experience</label>
+        <input type="text" class="form-control" formControlName="experience">
+      </div>
+    </div>
+
+    <!-- Certifications & Bank -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Certifications</label>
+        <input type="text" class="form-control" formControlName="certifications">
+      </div>
+      <div class="col-md-6">
+        <label>Bank Details ID</label>
+        <input type="number" class="form-control" formControlName="bankDetailsId">
+      </div>
+    </div>
+
+    <!-- Exit Reason & Location -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <label>Exit Reason</label>
+        <input type="text" class="form-control" formControlName="exitReason">
+      </div>
+      <!-- <div class="col-md-6">
+        <label>Location</label>
+        <input type="text" class="form-control" formControlName="location">
+      </div> -->
+    </div>
+
+    <!-- Address -->
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <label>Address</label>
+        <input type="text" class="form-control" formControlName="address">
+      </div>
+    </div>
+
+    <!-- Photo -->
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <label>Upload Photo</label>
+        <input type="file" class="form-control" (change)="onPhotoChange($event)">
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>

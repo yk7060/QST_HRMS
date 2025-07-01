@@ -1,0 +1,50 @@
+<div class="form-container">
+  <h2>Employee Document Upload</h2>
+  <form>
+      <div class="form-sections">
+          <div class="form-section">
+              <h3>Document Information</h3>
+              <div class="form-group">
+                  <label for="id">Document ID</label>
+                  <input type="text" id="id" name="id" />
+              </div>
+
+              <div class="form-group">
+                  <label for="employeeId">Employee ID</label>
+                  <input type="text" id="employeeId" name="employeeId" />
+              </div>
+
+              <div class="form-group">
+                  <label for="type">Document Type</label>
+                  <select id="type" name="type">
+                      <option value="">-- Select Type --</option>
+                      <option>Offer Letter</option>
+                      <option>ID</option>
+                      <option>Resume</option>
+                      <option>Proofs</option>
+                  </select>
+              </div>
+          </div>
+
+          <div class="form-section">
+              <h3>Upload Details</h3>
+              <div class="form-group">
+                  <label for="expiryDate">Expiry Date (Optional)</label>
+                  <input type="date" id="expiryDate" name="expiryDate" />
+              </div>
+
+              <div class="form-group">
+                  <label for="url">Document URL</label>
+                  <input type="url" id="url" name="url" placeholder="https://example.com/document.pdf" />
+              </div>
+
+              <div class="form-group">
+                  <label for="uploadedAt">Uploaded At</label>
+                  <input type="datetime-local" id="uploadedAt" name="uploadedAt" />
+              </div>
+          </div>
+      </div>
+
+      <button type="submit">Upload Document</button>
+  </form>
+</div>

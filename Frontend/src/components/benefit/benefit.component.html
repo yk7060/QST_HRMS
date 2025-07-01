@@ -1,0 +1,55 @@
+<div class="form-container">
+  <h2>Employee Benefit Details</h2>
+  <form>
+      <div class="form-sections">
+          <div class="form-section">
+              <h3>Basic Information</h3>
+              <div class="form-group">
+                  <label for="id">Benefit ID</label>
+                  <input type="text" id="id" name="id" />
+              </div>
+
+              <div class="form-group">
+                  <label for="name">Benefit Name</label>
+                  <select id="name" name="name">
+                      <option value="">-- Select Benefit --</option>
+                      <option>Health Insurance</option>
+                      <option>Provident Fund (PF)</option>
+                      <option>Gratuity</option>
+                      <option>Other</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="provider">Provider</label>
+                  <input type="text" id="provider" name="provider" />
+              </div>
+
+              <div class="form-group checkbox-group">
+                  <input type="checkbox" id="isMandatory" name="isMandatory" />
+                  <label for="isMandatory">Is Mandatory</label>
+              </div>
+          </div>
+
+          <div class="form-section">
+              <h3>Benefit Details</h3>
+              <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea id="description" name="description" rows="3" placeholder="Brief description..."></textarea>
+              </div>
+
+              <div class="form-group">
+                  <label for="eligibleAfterDays">Eligible After (Days)</label>
+                  <input type="number" id="eligibleAfterDays" name="eligibleAfterDays" />
+              </div>
+
+              <div class="form-group">
+                  <label for="documentsRequired">Documents Required</label>
+                  <textarea id="documentsRequired" name="documentsRequired" rows="3" placeholder="List of required documents..."></textarea>
+              </div>
+          </div>
+      </div>
+
+      <button type="submit">Save Benefit</button>
+  </form>
+</div>
