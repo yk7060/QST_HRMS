@@ -1,51 +1,44 @@
-version: '3.8'
-
+version: '3.4'
+ 
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: hrmsdb
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - mynetwork
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  springboot-service:
-    image: shamraokumbhar/backend:latest
-    container_name: springboot-service
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/hrmsdb
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-    depends_on:
-      mysql:
-        condition: service_healthy
-    networks:
-      - mynetwork
-
-  frontend:
-    image: shamraokumbhar/frontend:latest
-    container_name: frontend
-    ports:
-      - "4200:80"
-    depends_on:
-      - springboot-service
-    networks:
-      - mynetwork
-
-volumes:
-  mysql-data:
-
+ springboot-service:
+   image: shamraokumbhar/backend:latest
+   environment:
+     SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/hrmsdb
+     SPRING_DATASOURCE_USERNAME: root
+     SPRING_DATASOURCE_PASSWORD: root
+   ports:
+     - "8080:8080"
+   depends_on:
+     - mysql
+   networks:
+     - mynetwork
+ 
+ frontend:
+   image: shamraokumbhar/frontend:latest
+   ports:
+     - "4200:80"
+   depends_on:
+     - mysql
+   networks:
+     - mynetwork
+ 
+ 
+ mysql-service:
+   image: mysql:8.0
+   environment:
+     MYSQL_ROOT_PASSWORD: "root"
+     MYSQL_DATABASE: "hrmsdb"
+     MYSQL_PASSWORD: "root"
+   ports:
+     - "3306:3306"
+   volumes:
+     - mysql-data:/var/lib/mysql
+   networks:
+     - mynetwork
+ 
 networks:
-  mynetwork:
+ mynetwork:
+ 
+volumes:
+ mysql-data:
