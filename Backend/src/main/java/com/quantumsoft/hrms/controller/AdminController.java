@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("*")
+// @CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/api/admin")
 public class AdminController {
