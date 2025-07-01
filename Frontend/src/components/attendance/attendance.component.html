@@ -1,0 +1,70 @@
+<h2>Attendance Management</h2>
+
+<form [formGroup]="attendanceForm" (ngSubmit)="clockIn()">
+  <label>Working From:
+    <select formControlName="workingFrom">
+      <option value="">Select</option>
+      <option value="OFFICE">OFFICE</option>
+      <option value="REMOTE">REMOTE</option>
+    </select>
+  </label>
+  <br><br>
+
+  <label>Mode:
+    <select formControlName="mode">
+      <option value="">Select</option>
+      <option value="WEB">WEB</option>
+      <option value="MOBILE">MOBILE</option>
+      <option value="BIOMETRIC">BIOMETRIC</option>
+    </select>
+  </label>
+  <br><br>
+
+  <label>Location (Enter city manually):
+    <input formControlName="location" type="text" placeholder="Enter city (e.g. Pune)" />
+
+  </label>
+
+  <br><br>
+
+  <button type="submit">Clock In</button>
+</form>
+
+<br>
+<button (click)="clockOut()">Clock Out</button>
+
+<hr>
+
+<div *ngIf="isHR">
+  <h3>HR Reports</h3>
+
+  <form [formGroup]="reportForm">
+    <label>From Date:
+      <input type="date" formControlName="fromDate" />
+    </label>
+    <br><br>
+
+    <label>To Date:
+      <input type="date" formControlName="toDate" />
+    </label>
+    <br><br>
+
+    <label>Employee ID:
+      <input formControlName="employeeId" type="text" placeholder="Employee UUID" />
+    </label>
+    <br><br>
+
+    <label>Department ID:
+      <input formControlName="departmentId" type="number" placeholder="e.g. 1" />
+    </label>
+    <br><br>
+
+    <div style="margin-top: 10px;">
+      <button type="button" (click)="generatePdfReport()">Generate PDF</button>
+      <button type="button" (click)="generateCsvReport()">Generate CSV</button>
+      <button type="button" (click)="fetchMonthlyStatus()">Get Monthly Status</button>
+    </div>
+  </form>
+</div>
+
+<p-toast></p-toast>

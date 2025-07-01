@@ -1,0 +1,124 @@
+<div class="container mt-4">
+  <div class="card shadow-lg rounded-4 p-4">
+    <h3 class="text-primary mb-4 fw-bold">💼 Payroll Module - Quantumsoft Technologies Pvt Ltd</h3>
+
+    <form [formGroup]="payrollForm" class="row g-3">
+      <!-- Employee Details -->
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Employee Name:</label>
+        <input type="text" class="form-control" formControlName="empName" placeholder="e.g. Neha Ambekar" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Employee Code:</label>
+        <input type="text" class="form-control" formControlName="empCode" placeholder="e.g. CIT360" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Designation:</label>
+        <input type="text" class="form-control" formControlName="designation" placeholder="e.g. Java Developer" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Department:</label>
+        <input type="text" class="form-control" formControlName="department" placeholder="e.g. Cust. Development" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Bank Name:</label>
+        <input type="text" class="form-control" formControlName="bankName" placeholder="e.g. ICICI Bank" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Bank Account No:</label>
+        <input type="text" class="form-control" formControlName="bankAccNum" placeholder="e.g. 649301518578" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Payment Mode:</label>
+        <select class="form-select" formControlName="paymentMode">
+          <option value="">-- Select Mode --</option>
+          <option value="E-Pay">E-Pay</option>
+          <option value="Cheque">Cheque</option>
+          <option value="DD">Demand Draft</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">PAN No:</label>
+        <input type="text" class="form-control" formControlName="panNo" placeholder="e.g. EFWPA3328N" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Location:</label>
+        <input type="text" class="form-control" formControlName="location" placeholder="e.g. Pune" />
+      </div>
+
+      <!-- Payroll Period -->
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Payable Days:</label>
+        <input type="number" class="form-control" formControlName="payableDays" />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Paid Days:</label>
+        <input type="number" class="form-control" formControlName="paidDays" />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Joining Date:</label>
+        <input type="date" class="form-control" formControlName="joiningDate" />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Grade:</label>
+        <input type="text" class="form-control" formControlName="grade" placeholder="e.g. L1" />
+      </div>
+
+      <!-- Earnings Section -->
+      <div class="col-12">
+        <h5 class="text-success mt-4">Earnings</h5>
+      </div>
+
+      <div class="col-md-3" *ngFor="let field of ['basic', 'hra', 'flatAllowance', 'fuel', 'medical', 'special']">
+        <label class="form-label fw-semibold text-capitalize">{{ formatLabel(field) }}:</label>
+        <input type="number" class="form-control" [formControlName]="field" placeholder="₹ 0.00" />
+      </div>
+
+      <!-- Deductions Section -->
+      <div class="col-12">
+        <h5 class="text-danger mt-4">Deductions</h5>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Professional Tax:</label>
+        <input type="number" class="form-control" formControlName="professionalTax" placeholder="₹ 0.00" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Income Tax:</label>
+        <input type="number" class="form-control" formControlName="incomeTax" placeholder="₹ 0.00" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Miscellaneous:</label>
+        <input type="number" class="form-control" formControlName="miscellaneous" placeholder="₹ 0.00" />
+      </div>
+    </form>
+
+    <!-- Action Buttons -->
+    <div class="mt-4 d-flex flex-wrap gap-2">
+      <button class="btn btn-primary" (click)="fetchStructure()">Fetch Salary Structure</button>
+      <button class="btn btn-success" (click)="addPayroll()">Add Payroll</button>
+      <button class="btn btn-warning" (click)="generatePayslip()">Generate Payslip</button>
+      <button class="btn btn-info text-white" (click)="viewPayslip()">View Payslip</button>
+      <button class="btn btn-dark" (click)="downloadPayslip()">Download Payslip</button>
+    </div>
+
+    <!-- Payslip JSON -->
+    <div class="mt-4" *ngIf="payslipData">
+      <h5 class="text-success">📄 Payslip JSON Data</h5>
+      <pre class="bg-light p-3 rounded">{{ payslipData | json }}</pre>
+    </div>
+  </div>
+</div>

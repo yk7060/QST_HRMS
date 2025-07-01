@@ -1,0 +1,65 @@
+.card {
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+ 
+h4 {
+  font-weight: 700;
+  color: #1f4e79;
+}
+ 
+label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+ 
+input.form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 0.5rem 0.75rem;
+}
+ 
+input.form-control:focus {
+  border-color: #1f4e79;
+  box-shadow: 0 0 0 0.2rem rgba(31, 78, 121, 0.25);
+}
+ 
+button.btn {
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+}
+ 
+button.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+ 
+button.btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+ 
+button.btn-info {
+  background-color: #17a2b8;
+  border: none;
+}
+ 
+button:hover {
+  opacity: 0.9;
+}
+ 
+@media (max-width: 768px) {
+  .row.g-3 > div {
+    margin-bottom: 1rem;
+  }
+ 
+  .d-flex.gap-3 {
+    flex-direction: column;
+  }
+}
+ 
+ 

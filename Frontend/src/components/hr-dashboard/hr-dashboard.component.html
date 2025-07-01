@@ -1,0 +1,247 @@
+<div class="container-fluid">
+  <app-hr-sidebar></app-hr-sidebar>
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">HR Dashboard</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+      <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+    </a>
+  </div>
+
+  <!-- Content Row -->
+<div class="row">
+  <!-- Total Employees Card -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="metric-card primary-metric animated-card" style="animation-delay: 0.1s">
+      <div class="metric-title">Total Employees</div>
+      <div class="metric-value">{{totalEmployees}}</div>
+      <i class="fas fa-users metric-icon"></i>
+    </div>
+  </div>
+
+    <!-- New Hires Card -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="metric-card success-metric animated-card" style="animation-delay: 0.2s">
+      <div class="metric-title">New Hires (This Month)</div>
+      <div class="metric-value">{{newHiresThisMonth}}</div>
+      <i class="fas fa-user-plus metric-icon"></i>
+    </div>
+  </div>
+
+    <!-- On Leave Card -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="metric-card info-metric animated-card" style="animation-delay: 0.3s">
+      <div class="metric-title">Employees on Leave</div>
+      <div class="metric-value">{{employeesOnLeave}}</div>
+      <i class="fas fa-umbrella-beach metric-icon"></i>
+    </div>
+  </div>
+
+     <!-- Attrition Rate Card -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="metric-card warning-metric animated-card" style="animation-delay: 0.4s">
+      <div class="metric-title">Attrition Rate</div>
+      <div class="metric-value">{{attritionRate}}%</div>
+      <i class="fas fa-sign-out-alt metric-icon"></i>
+    </div>
+  </div>
+</div>
+
+  <!-- Content Row -->
+  <div class="row">
+    <!-- Department Distribution -->
+    <div class="col-xl-6 col-lg-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Department Distribution</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-pie pt-4 pb-2">
+            <canvas baseChart 
+              [data]="departmentData" 
+              type="pie">
+            </canvas>
+          </div>
+          <div class="mt-4 text-center small">
+            <span class="mr-2">
+              <i class="fas fa-circle text-primary"></i> Engineering
+            </span>
+            <span class="mr-2">
+              <i class="fas fa-circle text-success"></i> Marketing
+            </span>
+            <span class="mr-2">
+              <i class="fas fa-circle text-info"></i> Sales
+            </span>
+            <span class="mr-2">
+              <i class="fas fa-circle text-warning"></i> HR
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hiring Pipeline -->
+    <div class="col-xl-6 col-lg-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Hiring Pipeline</h6>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <div class="progress mb-2">
+              <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" 
+                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">Applied</div>
+              <div class="progress-bar bg-warning" role="progressbar" style="width: 15%"
+                aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">Screening</div>
+              <div class="progress-bar bg-info" role="progressbar" style="width: 12%"
+                aria-valuenow="12" aria-valuemin="0" aria-valuemax="100">Interview</div>
+              <div class="progress-bar bg-primary" role="progressbar" style="width: 5%"
+                aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">Offer</div>
+              <div class="progress-bar bg-success" role="progressbar" style="width: 3%"
+                aria-valuenow="3" aria-valuemin="0" aria-valuemax="100">Hired</div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Stage</th>
+                  <th>Candidates</th>
+                  <th>Conversion Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let stage of hiringStages; let i = index">
+                  <td>{{stage.stage}}</td>
+                  <td>{{stage.count}}</td>
+                  <td>
+                    {{ i > 0 ? 
+                      (stage.count / hiringStages[i-1].count * 100 | number:'1.0-1') + '%' : 
+                      '100%' }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Row -->
+  <div class="row">
+    <!-- Performance Ratings -->
+    <div class="col-xl-8 col-lg-7">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Performance Ratings (Quarterly)</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-bar">
+            <canvas baseChart 
+              [data]="performanceData" 
+              [options]="performanceOptions"
+              type="bar">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leave Balance -->
+    <div class="col-xl-4 col-lg-5">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Leave Balance</h6>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let leave of leaveBalance" class="mb-4">
+            <h4 class="small font-weight-bold">{{leave.type}} 
+              <span class="float-right">{{leave.used}}/{{leave.balance + leave.used}}</span>
+            </h4>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" 
+                [style.width]="(leave.used / (leave.balance + leave.used) * 100 + '%')"
+                [attr.aria-valuenow]="leave.used" 
+                aria-valuemin="0" 
+                [attr.aria-valuemax]="leave.balance + leave.used">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Row -->
+
+
+
+
+
+  <div class="row">
+    <!-- Upcoming Events -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Upcoming Events</h6>
+        </div>
+
+
+        <div class="card-body">
+          <div *ngFor="let event of upcomingEvents" class="mb-3">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                      {{event.date | date:'mediumDate'}}</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{event.title}}</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas {{getEventIcon(event.type)}} fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+
+
+
+
+
+    
+
+    <!-- Training Status -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Training Status</h6>
+        </div>
+        <div class="card-body">
+          <h4 class="small font-weight-bold">Completed <span class="float-right">{{trainingStatus.completed}}%</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-success" role="progressbar" [style.width]="trainingStatus.completed + '%'"
+              aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h4 class="small font-weight-bold">In Progress <span class="float-right">{{trainingStatus.inProgress}}%</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-warning" role="progressbar" [style.width]="trainingStatus.inProgress + '%'"
+              aria-valuenow="23" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h4 class="small font-weight-bold">Not Started <span class="float-right">{{trainingStatus.notStarted}}%</span></h4>
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" [style.width]="trainingStatus.notStarted + '%'"
+              aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

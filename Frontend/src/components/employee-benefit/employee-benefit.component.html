@@ -1,0 +1,48 @@
+<div class="form-container">
+  <h2>Employee Benefit Enrollment</h2>
+  <form>
+      <div class="form-sections">
+          <div class="form-section">
+              <h3>Enrollment Details</h3>
+              <div class="form-group">
+                  <label for="id">Record ID</label>
+                  <input type="text" id="id" name="id" />
+              </div>
+
+              <div class="form-group">
+                  <label for="employeeId">Employee ID</label>
+                  <input type="text" id="employeeId" name="employeeId" />
+              </div>
+
+              <div class="form-group">
+                  <label for="benefitId">Benefit ID</label>
+                  <input type="text" id="benefitId" name="benefitId" />
+              </div>
+          </div>
+
+          <div class="form-section">
+              <h3>Status & Documentation</h3>
+              <div class="form-group">
+                  <label for="enrollmentDate">Enrollment Date</label>
+                  <input type="date" id="enrollmentDate" name="enrollmentDate" />
+              </div>
+
+              <div class="form-group">
+                  <label for="status">Status</label>
+                  <select id="status" name="status">
+                      <option value="">-- Select Status --</option>
+                      <option>Active</option>
+                      <option>Expired</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="documents">Documents (URLs or Notes)</label>
+                  <textarea id="documents" name="documents" rows="3" placeholder="Enter document URLs or references..."></textarea>
+              </div>
+          </div>
+      </div>
+
+      <button type="submit">Save Enrollment</button>
+  </form>
+</div>
