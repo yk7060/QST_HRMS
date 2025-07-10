@@ -1,6 +1,7 @@
 export const environment = {
-  production: true,  // ✅ Since you're deploying this
-  apiBaseUrl: 'http://3.90.235.184:8080/api',  // 🔁 Replace with your backend IP/domain
+  production: true,
+  apiBaseUrl: 'http://54.144.232.38:8080/api',
   appName: 'HRMS',
   enableDebug: false
 };
+
