@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://54.144.232.38:8080/api',
+  apiBaseUrl: 'http://13.221.21.162:8080/api',
   appName: 'HRMS',
   enableDebug: false
 };
